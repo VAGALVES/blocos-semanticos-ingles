@@ -134,9 +134,28 @@
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            padding: 0 12px;
-            gap: 10px;
+            padding: 0 10px;
+            gap: 8px;
             z-index: 200;
+        }
+
+        /* ─── MOBILE SEARCH BAR (secondary row, mobile only) ─── */
+        .mobile-search-bar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 12px;
+            z-index: 150;
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-search-bar .search-box {
+            width: 100%;
+            flex: 1;
         }
 
         /* ─── VS CONSULTING BRANDING ─── */
@@ -144,16 +163,21 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            flex-shrink: 0;
+            min-width: 0;
+            overflow: hidden;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--gold);
             white-space: nowrap;
             line-height: 1.1;
+            /* On mobile, truncate instead of pushing everyone else off screen */
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .logo-brand {
@@ -249,6 +273,11 @@
             min-width: 0;
         }
 
+        /* On mobile: hide in-header search, use mobile-search-bar instead */
+        header .search-box {
+            display: none;
+        }
+
         .search-box input {
             background: none;
             border: none;
@@ -268,6 +297,7 @@
             color: var(--text-muted);
             white-space: nowrap;
             flex-shrink: 0;
+            margin-left: auto; /* Pushes counter + buttons to the right */
         }
 
         /* ─── THEME TOGGLE ─── */
@@ -275,17 +305,17 @@
             background: var(--surface-2);
             border: 1px solid var(--border);
             border-radius: 6px;
-            padding: 7px 9px;
+            padding: 6px;
             cursor: pointer;
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
             flex-shrink: 0;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
         }
 
         .theme-toggle:hover {
@@ -299,17 +329,17 @@
             background: var(--surface-2);
             border: 1px solid var(--border);
             border-radius: 6px;
-            padding: 7px 9px;
+            padding: 6px;
             cursor: pointer;
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
             flex-shrink: 0;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
         }
 
         .export-btn:hover {
@@ -725,11 +755,11 @@
 
         /* ─── MAIN CONTENT ─── */
         main {
-            /* Mobile: full width, no left margin */
+            /* Mobile: full width, margin accommodates header + search bar */
             margin-left: 0;
-            margin-top: var(--header-height);
+            margin-top: calc(var(--header-height) + 52px);
             padding: 16px;
-            min-height: calc(100vh - var(--header-height));
+            min-height: calc(100vh - var(--header-height) - 52px);
         }
 
         /* ─── GRID — 1 col on mobile ─── */
@@ -1495,9 +1525,21 @@
                 display: none !important;
             }
 
+            /* Desktop: hide mobile search bar, show in-header search */
+            .mobile-search-bar {
+                display: none;
+            }
+
+            header .search-box {
+                display: flex;
+                max-width: 400px;
+            }
+
             main {
                 margin-left: var(--sidebar-width);
+                margin-top: var(--header-height);
                 padding: 30px;
+                min-height: calc(100vh - var(--header-height));
             }
 
             .blocks-grid {
@@ -1507,6 +1549,7 @@
 
             .logo {
                 font-size: 22px;
+                max-width: none;
             }
 
             .logo-brand {
@@ -1519,6 +1562,10 @@
 
             .en-pattern {
                 font-size: 20px;
+            }
+
+            .counter {
+                margin-left: 0;
             }
         }
 
@@ -1572,6 +1619,13 @@
             <span id="themeIcon">☀️</span>
         </button>
     </header>
+
+    <!-- Mobile-only secondary row for search (hidden on desktop) -->
+    <div class="mobile-search-bar">
+        <div class="search-box">
+            <input type="text" id="searchInputMobile" placeholder="Buscar padrões ou traduções...">
+        </div>
+    </div>
 
     <!-- Export modal -->
     <div class="export-overlay" id="exportOverlay">
@@ -1646,7 +1700,7 @@
             <div class="footer-copy">
                 <span>Blocos Semânticos em Inglês</span> — Material didático exclusivo<br>
                 © 2025 VS Consulting™. Todos os direitos reservados.<br>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;opacity:0.6;">build v3.1 · PNG Icons</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;opacity:0.6;">build v3.2 · Mobile Header Fix</span>
             </div>
         </footer>
     </main>
@@ -5659,7 +5713,21 @@
         }
 
         function attachEventListeners() {
-            document.getElementById('searchInput').addEventListener('input', filterBlocks);
+            // Sync desktop + mobile search inputs
+            const searchDesk   = document.getElementById('searchInput');
+            const searchMobile = document.getElementById('searchInputMobile');
+
+            function handleSearch(source) {
+                return (e) => {
+                    // Mirror value to the other input
+                    if (source === 'desk' && searchMobile) searchMobile.value = e.target.value;
+                    if (source === 'mob'  && searchDesk)   searchDesk.value   = e.target.value;
+                    filterBlocks();
+                };
+            }
+            if (searchDesk)   searchDesk.addEventListener('input', handleSearch('desk'));
+            if (searchMobile) searchMobile.addEventListener('input', handleSearch('mob'));
+
             document.getElementById('resetBtn').addEventListener('click', resetFilters);
 
             document.querySelectorAll('[data-filter]').forEach(btn => {
@@ -5678,8 +5746,15 @@
             });
         }
 
+        function getActiveSearchTerm() {
+            const desk   = document.getElementById('searchInput');
+            const mobile = document.getElementById('searchInputMobile');
+            // Either one — whichever has a value
+            return ((desk && desk.value) || (mobile && mobile.value) || '').toLowerCase();
+        }
+
         function filterBlocks() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchTerm = getActiveSearchTerm();
             const activeLevelBtn = document.querySelector('[data-filter="level"].active');
             const activeLevelValue = activeLevelBtn ? activeLevelBtn.dataset.value : 'all';
             const activeCategories = Array.from(document.querySelectorAll('[data-filter="category"].active')).map(b => b.dataset.value);
@@ -6012,7 +6087,10 @@
         }
 
         function resetFilters() {
-            document.getElementById('searchInput').value = '';
+            const desk = document.getElementById('searchInput');
+            const mob  = document.getElementById('searchInputMobile');
+            if (desk) desk.value = '';
+            if (mob)  mob.value  = '';
             document.querySelectorAll('[data-filter]').forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-filter="level"][data-value="all"]').classList.add('active');
             filterBlocks();
