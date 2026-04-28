@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blocos Semânticos · VS Linguistic Lab</title>
 
     <!-- ─── PWA META ─── -->
-    <meta name="theme-color" content="#0A1628">
+    <meta name="theme-color" content="#0A1220">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Blocos EN">
@@ -14,12 +14,12 @@
     <meta property="og:site_name" content="VS Linguistic Lab">
     <meta property="og:title" content="Blocos Semânticos em Inglês">
     <meta property="og:description" content="A arquitetura semântica do inglês — 230 blocos, áudio, IPA, exemplos contextualizados.">
-    <meta property="og:type" content="website">
 
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -31,93 +31,89 @@
         }
 
         :root {
-            /* ═══ VS LINGUISTIC LAB — Editorial Tokens (oficial) ═══ */
-            /* Base ink scale (dark navy editorial) */
+            /* ═══ VS LINGUISTIC LAB — Editorial Tokens ═══ */
             --ink:    #0A1220;
             --ink-2:  #10192B;
             --ink-3:  #18223A;
             --ink-4:  #202C48;
 
-            /* Paper tones (text on dark) */
             --paper:    #F5F1E8;
             --paper-80: rgba(245, 241, 232, 0.82);
             --paper-60: rgba(245, 241, 232, 0.58);
             --paper-40: rgba(245, 241, 232, 0.38);
 
-            /* Gold — single accent of the system */
             --gold:      #C9A35C;
             --gold-soft: rgba(201, 163, 92, 0.12);
             --gold-line: rgba(201, 163, 92, 0.28);
 
-            /* Hairlines */
             --line:        rgba(245, 241, 232, 0.08);
             --line-strong: rgba(245, 241, 232, 0.16);
 
-            /* Tripartite — sage / amber / terracotta */
-            --sage:      #7FA889;
-            --sage-soft: rgba(127, 168, 137, 0.10);
-            --sage-line: rgba(127, 168, 137, 0.32);
-            --amber:     #C9A35C;
-            --amber-soft: rgba(201, 163, 92, 0.10);
-            --amber-line: rgba(201, 163, 92, 0.32);
-            --terra:     #C77B5C;
-            --terra-soft: rgba(199, 123, 92, 0.10);
-            --terra-line: rgba(199, 123, 92, 0.32);
+            --sage:        #7FA889;
+            --sage-soft:   rgba(127, 168, 137, 0.10);
+            --sage-line:   rgba(127, 168, 137, 0.32);
+            --terra:       #C77B5C;
+            --terra-soft:  rgba(199, 123, 92, 0.10);
+            --terra-line:  rgba(199, 123, 92, 0.32);
 
-            /* App-specific tokens (mapped from Linguistic Lab base) */
-            --teal: #0D9488;
+            /* Functional accents */
+            --teal:       #0D9488;
             --teal-light: #14B8A6;
-            --gold-light: #E0BB6F;
-            --gold-deep: #A8822E;
             --success: #22C55E;
             --warning: #F59E0B;
-            --error: #EF4444;
+            --error:   #EF4444;
 
-            /* Family colors — kept stable for content categorization */
-            --fam-social:       #F97316;
-            --fam-emotional:    #F472B6;
-            --fam-cognitive:    #A78BFA;
-            --fam-action:       #FBBF24;
-            --fam-temporal:     #34D399;
-            --fam-discursive:   #38BDF8;
-
-            --sidebar-width: 260px;
-            --header-height: 64px;
-
-            /* Editorial typography stack */
+            /* Typography */
             --font-display: 'Fraunces', Georgia, serif;
             --font-body:    'Instrument Sans', system-ui, sans-serif;
             --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+            /* Family colors — desaturated to fit editorial palette */
+            --fam-social:     #E8915C;
+            --fam-emotional:  #D88BAB;
+            --fam-cognitive:  #B79CE0;
+            --fam-action:     #E0BB6F;
+            --fam-temporal:   #7FA889;
+            --fam-discursive: #6CA4C4;
+
+            --sidebar-width: 280px;
+            --header-height: 64px;
+
+            --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --dur-fast: 180ms;
+            --dur-med:  280ms;
         }
 
-        /* DARK THEME (default) — uses ink/paper directly */
+        /* DARK THEME (default) */
         :root, [data-theme="dark"] {
-            --navy: var(--ink);
-            --surface: var(--ink-2);
-            --surface-2: var(--ink-3);
-            --border: var(--line-strong);
-            --text: var(--paper);
-            --text-muted: var(--paper-80);
-            --text-dim: var(--paper-60);
+            --navy:        var(--ink);
+            --surface:     var(--ink-2);
+            --surface-2:   var(--ink-3);
+            --border:      var(--line-strong);
+            --text:        var(--paper);
+            --text-muted:  var(--paper-80);
+            --text-dim:    var(--paper-60);
             --shadow-soft: rgba(0, 0, 0, 0.4);
-            --overlay-bg: rgba(10, 18, 32, 0.85);
-            --hairline: var(--gold-line);
+            --overlay-bg:  rgba(10, 18, 32, 0.85);
         }
 
-        /* LIGHT THEME — Editorial paper */
+        /* LIGHT THEME */
         [data-theme="light"] {
-            --navy: #FAF7F0;
-            --surface: #FFFFFF;
-            --surface-2: #F5F1E8;
-            --border: rgba(10, 18, 32, 0.12);
-            --text: #0A1220;
-            --text-muted: rgba(10, 18, 32, 0.72);
-            --text-dim: rgba(10, 18, 32, 0.50);
+            --navy:        #FAF7F0;
+            --surface:     #FFFFFF;
+            --surface-2:   #F5F1E8;
+            --border:      rgba(10, 18, 32, 0.16);
+            --text:        #0A1220;
+            --text-muted:  rgba(10, 18, 32, 0.72);
+            --text-dim:    rgba(10, 18, 32, 0.50);
             --shadow-soft: rgba(60, 70, 90, 0.08);
-            --overlay-bg: rgba(245, 241, 232, 0.92);
-            --hairline: rgba(168, 130, 46, 0.25);
-            --teal: #0F766E;
-            --gold: #A8822E;
+            --overlay-bg:  rgba(245, 241, 232, 0.92);
+            --gold:        #A8822E;
+            --gold-soft:   rgba(168, 130, 46, 0.10);
+            --gold-line:   rgba(168, 130, 46, 0.30);
+            --teal:        #0F766E;
+            --line:        rgba(10, 18, 32, 0.06);
+            --line-strong: rgba(10, 18, 32, 0.12);
         }
 
         body {
@@ -125,24 +121,23 @@
             color: var(--text);
             font-family: var(--font-body);
             font-size: 15px;
-            line-height: 1.5;
+            line-height: 1.55;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
             transition: background 0.4s ease, color 0.4s ease;
         }
 
-        /* Subtle decorative grain on dark theme */
         [data-theme="dark"] body::before {
             content: "";
             position: fixed;
             inset: 0;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
             background:
-                radial-gradient(1200px 800px at 80% -10%, var(--gold-soft), transparent 60%),
-                radial-gradient(900px 600px at -10% 110%, rgba(127, 168, 137, 0.05), transparent 55%);
-            opacity: 0.6;
+                radial-gradient(900px 600px at 80% -10%, var(--gold-soft), transparent 60%),
+                radial-gradient(700px 500px at -10% 110%, var(--sage-soft), transparent 55%);
+            opacity: 0.7;
         }
 
         /* ─── MICRO-INTERACTIONS ─── */
@@ -186,7 +181,7 @@
             animation: starPulse 0.5s ease;
         }
 
-        /* ─── HEADER (Linguistic Lab topbar) ─── */
+        /* ═══ HEADER · Linguistic Lab Topbar ═══ */
         header {
             position: fixed;
             top: 0;
@@ -199,27 +194,34 @@
             border-bottom: 1px solid var(--line);
             display: flex;
             align-items: center;
-            padding: 0 14px;
-            gap: 12px;
+            padding: 0 16px;
+            gap: 14px;
             z-index: 200;
         }
 
         [data-theme="light"] header {
-            background: rgba(245, 241, 232, 0.82);
+            background: rgba(245, 241, 232, 0.85);
+            border-bottom-color: var(--line-strong);
         }
 
-        /* ─── MOBILE SEARCH BAR (secondary row, mobile only) ─── */
+        /* ─── MOBILE SEARCH BAR (secondary row) ─── */
         .mobile-search-bar {
             position: fixed;
             top: var(--header-height);
             left: 0;
             right: 0;
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 8px 12px;
+            background: rgba(10, 18, 32, 0.65);
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            border-bottom: 1px solid var(--line);
+            padding: 10px 14px;
             z-index: 150;
             display: flex;
             align-items: center;
+        }
+
+        [data-theme="light"] .mobile-search-bar {
+            background: rgba(245, 241, 232, 0.85);
         }
 
         .mobile-search-bar .search-box {
@@ -227,29 +229,30 @@
             flex: 1;
         }
 
-        /* ─── VS LINGUISTIC LAB — Brand pattern (oficial) ─── */
+        /* ═══ BRAND · Linguistic Lab pattern oficial ═══ */
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             min-width: 0;
             flex-shrink: 0;
         }
 
         .brand__mark {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r-sm);
             border: 1px solid var(--gold-line);
             background: var(--gold-soft);
             display: grid;
             place-items: center;
             font-family: var(--font-display);
             font-weight: 900;
-            font-size: 12px;
+            font-size: 13px;
             color: var(--gold);
             flex-shrink: 0;
-            transition: all 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: all var(--dur-med) var(--ease-out);
+            font-variation-settings: "opsz" 144;
         }
 
         .brand__mark:hover {
@@ -268,18 +271,18 @@
         .brand__kicker {
             font-family: var(--font-mono);
             font-size: 9px;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
             color: var(--gold);
             line-height: 1;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .brand__name {
             font-family: var(--font-display);
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            color: var(--paper);
+            color: var(--text);
             line-height: 1.2;
             white-space: nowrap;
             overflow: hidden;
@@ -287,93 +290,9 @@
             letter-spacing: -0.01em;
         }
 
-        .topbar__version {
-            font-family: var(--font-mono);
-            font-size: 9px;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: var(--paper-60);
-            padding: 5px 10px;
-            border: 1px solid var(--line-strong);
-            border-radius: 999px;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        /* ─── Legacy aliases preserved for backward CSS ─── */
-        .vs-seal {
-            width: 32px;
-            height: 32px;
-            border: 1px solid var(--gold-line);
-            border-radius: 8px;
-            display: grid;
-            place-items: center;
-            font-family: var(--font-display);
-            font-size: 12px;
-            font-weight: 900;
-            color: var(--gold);
-            background: var(--gold-soft);
-            flex-shrink: 0;
-            transition: all 280ms;
-        }
-
-        .vs-seal:hover {
-            background: var(--gold);
-            color: var(--ink);
-        }
-
-        .logo-wrap {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 0;
-            overflow: hidden;
-            gap: 1px;
-            line-height: 1;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--paper);
-            white-space: nowrap;
-            line-height: 1.2;
-            max-width: 200px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            letter-spacing: -0.01em;
-        }
-
-        .logo em {
-            font-style: italic;
-            color: var(--gold);
-            font-weight: 500;
-        }
-
-        .logo-brand {
-            font-family: var(--font-mono);
-            font-size: 9px;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--gold);
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            line-height: 1;
-            margin-top: 3px;
-        }
-
-        .logo-brand .lab {
-            color: var(--gold);
-        }
-
-        .logo-brand .sep {
-            opacity: 0.4;
-            color: var(--paper-60);
-        }
+        /* ─── Legacy aliases preserved ─── */
+        .logo-wrap { display: none; }
+        .logo, .logo-brand { display: none; }
 
         /* Sidebar brand footer */
         .sidebar-brand {
@@ -399,7 +318,114 @@
             margin-top: 3px;
         }
 
-        /* ─── Footer (Linguistic Lab pattern oficial) ─── */
+        /* ═══ HERO · Editorial intro ═══ */
+        .hero {
+            padding: 32px 4px 40px;
+            position: relative;
+            max-width: 720px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 32px;
+        }
+
+        .hero__meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .hero__meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero__meta-item::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: inline-block;
+        }
+
+        .hero__meta-sep {
+            width: 1px;
+            height: 12px;
+            background: var(--line-strong);
+            display: inline-block;
+        }
+
+        .hero__title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 1.5rem + 3vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 24px;
+            max-width: 16ch;
+            font-variation-settings: "opsz" 144;
+        }
+
+        .hero__title .stanza {
+            display: block;
+        }
+
+        .hero__title em {
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .hero__lead {
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 0.95rem + 0.4vw, 1.15rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.55;
+            max-width: 60ch;
+            margin-bottom: 24px;
+        }
+
+        .hero__tldr {
+            border-left: 2px solid var(--gold);
+            padding-left: 16px;
+            max-width: 60ch;
+        }
+
+        .hero__tldr .eyebrow {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .hero__tldr p {
+            margin: 0;
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .hero__tldr em {
+            font-style: italic;
+            color: var(--text);
+        }
+
+        /* ═══ FOOTER · Linguistic Lab ═══ */
         .main-footer {
             margin-top: 64px;
             padding: 56px 24px 40px;
@@ -412,7 +438,7 @@
             font-family: var(--font-display);
             font-size: 28px;
             font-weight: 900;
-            color: var(--paper);
+            color: var(--text);
             letter-spacing: -0.03em;
             margin-bottom: 12px;
             font-variation-settings: "opsz" 144;
@@ -436,14 +462,14 @@
             font-size: 9px;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: var(--paper-60);
+            color: var(--text-muted);
             margin-bottom: 8px;
         }
 
         .footer__meta {
             font-family: var(--font-body);
             font-size: 12px;
-            color: var(--paper-40);
+            color: var(--text-dim);
             max-width: 48ch;
             margin: 8px auto 0;
             line-height: 1.6;
@@ -451,7 +477,7 @@
 
         .footer__meta em {
             font-style: italic;
-            color: var(--paper-60);
+            color: var(--text-muted);
         }
 
         .footer__build {
@@ -459,18 +485,17 @@
             font-size: 9px;
             letter-spacing: 0.16em;
             text-transform: uppercase;
-            color: var(--paper-40);
-            opacity: 0.6;
+            color: var(--text-dim);
+            opacity: 0.5;
             display: block;
-            margin-top: 12px;
+            margin-top: 16px;
         }
 
-        /* Legacy aliases */
+        /* Legacy footer aliases (hidden) */
         .footer-brand,
         .footer-tagline,
         .footer-divider,
-        .footer-copy,
-        .footer-rule { display: none; }
+        .footer-copy { display: none; }
 
         .search-box {
             flex: 1;
@@ -980,39 +1005,42 @@
             gap: 14px;
         }
 
-        /* ─── BLOCK CARD ─── */
+        /* ═══ BLOCK CARD · Editorial pattern ═══ */
         .block-card {
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--fam-color, var(--teal));
-            border-radius: 8px;
-            padding: 16px;
-            transition: all 0.3s;
+            border: 1px solid var(--line);
+            border-radius: var(--r-md);
+            padding: 24px 20px;
+            transition: all var(--dur-med) var(--ease-out);
             cursor: default;
             position: relative;
             overflow: hidden;
         }
 
+        /* Subtle top hairline accent (gold, very thin) */
         .block-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 1px;
-            background: linear-gradient(to right, var(--fam-color, var(--teal)), transparent 60%);
-            opacity: 0.5;
+            background: linear-gradient(to right, var(--gold-line) 0%, transparent 40%);
+            opacity: 0.6;
+            transition: opacity var(--dur-med);
         }
 
         .block-card:hover {
-            border-top-color: var(--border);
-            border-right-color: var(--border);
-            border-bottom-color: var(--border);
-            border-left-color: var(--fam-color, var(--teal-light));
-            box-shadow: 0 8px 24px -4px color-mix(in srgb, var(--fam-color, var(--teal)) 20%, transparent),
-                        0 4px 12px rgba(0, 0, 0, 0.2);
-            transform: translateY(-1px);
+            border-color: var(--gold-line);
+            transform: translateY(-2px);
+            box-shadow:
+                0 1px 0 rgba(245, 241, 232, 0.04) inset,
+                0 30px 60px -30px rgba(0, 0, 0, 0.5);
         }
 
-        /* Family data attributes map to color */
+        .block-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Family data attribute kept for legacy CSS, but not visually emphasized */
         .block-card[data-fam="social"]     { --fam-color: var(--fam-social); }
         .block-card[data-fam="emotional"]  { --fam-color: var(--fam-emotional); }
         .block-card[data-fam="cognitive"]  { --fam-color: var(--fam-cognitive); }
@@ -1020,23 +1048,26 @@
         .block-card[data-fam="temporal"]   { --fam-color: var(--fam-temporal); }
         .block-card[data-fam="discursive"] { --fam-color: var(--fam-discursive); }
 
+        /* ═══ BADGES · Editorial mono pills ═══ */
         .badge-family {
-            font-size: 10px;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 4px;
-            letter-spacing: 0.8px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 999px;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            background: color-mix(in srgb, var(--fam-color, var(--teal)) 15%, transparent);
-            color: var(--fam-color, var(--teal));
-            border: 1px solid color-mix(in srgb, var(--fam-color, var(--teal)) 25%, transparent);
+            background: transparent;
+            color: var(--fam-color, var(--gold));
+            border: 1px solid color-mix(in srgb, var(--fam-color, var(--gold-line)) 50%, transparent);
+            line-height: 1;
         }
 
         .block-header {
             display: flex;
             gap: 8px;
             align-items: flex-start;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             justify-content: space-between;
         }
 
@@ -1047,32 +1078,36 @@
         }
 
         .badge {
-            font-size: 10px;
-            font-weight: 600;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 500;
             text-transform: uppercase;
-            padding: 4px 8px;
-            border-radius: 4px;
-            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            letter-spacing: 0.18em;
+            line-height: 1;
+            background: transparent;
+            border: 1px solid var(--line-strong);
         }
 
         .badge-basic {
-            background: rgba(34, 197, 94, 0.15);
-            color: var(--success);
+            color: var(--sage);
+            border-color: var(--sage-line);
         }
 
         .badge-intermediate {
-            background: rgba(212, 168, 67, 0.15);
             color: var(--gold);
+            border-color: var(--gold-line);
         }
 
         .badge-advanced {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--error);
+            color: var(--terra);
+            border-color: var(--terra-line);
         }
 
         .badge-category {
-            background: rgba(13, 148, 136, 0.15);
-            color: var(--teal-light);
+            color: var(--text-muted);
+            border-color: var(--line-strong);
         }
 
         .favorite-btn {
@@ -1092,54 +1127,60 @@
 
         .en-pattern {
             font-family: var(--font-display);
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--gold);
-            line-height: 1.25;
+            line-height: 1.2;
             letter-spacing: -0.015em;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             word-break: break-word;
             font-variation-settings: "opsz" 144;
+        }
+
+        .en-pattern em {
+            font-style: italic;
+            font-weight: 500;
         }
 
         .category-tag {
             font-family: var(--font-mono);
             font-size: 9px;
             font-weight: 500;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: color-mix(in srgb, var(--fam-color, var(--teal)) 70%, var(--text-muted));
-            margin-bottom: 10px;
-            opacity: 0.85;
-            opacity: 0.85;
+            color: var(--text-dim);
+            margin-bottom: 16px;
         }
 
         .divider {
             height: 1px;
-            background: linear-gradient(to right, var(--border), transparent);
-            margin: 12px 0;
+            background: linear-gradient(to right, var(--gold-line) 0%, transparent 60%);
+            margin: 16px 0;
         }
 
         .pt-pattern {
-            font-size: 14px;
-            color: var(--teal-light);
-            margin-bottom: 16px;
-            line-height: 1.5;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.45;
         }
 
         .word-slots {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .word-slot {
             background: var(--surface-2);
-            border: 1px solid var(--border);
-            color: var(--gold);
-            padding: 6px 10px;
-            border-radius: 4px;
+            border: 1px solid var(--line-strong);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 999px;
             font-size: 12px;
             font-family: var(--font-mono);
             cursor: pointer;
@@ -1300,6 +1341,34 @@
         .example-pt {
             color: var(--text-muted);
             font-size: 12px;
+        }
+
+        /* ═══ EXAMPLE PATTERN HIGHLIGHT · Editorial Gold Marker ═══ */
+        /* Destaca o trecho do bloco-padrão dentro do exemplo contextualizado.
+           Usa cor gold + fundo gold-soft + border-bottom — efeito "highlighter editorial"
+           que cria ancoragem semântica sem competir com o título do bloco (já em gold). */
+        .example-highlight {
+            color: var(--gold);
+            background: var(--gold-soft);
+            border-bottom: 1px solid var(--gold-line);
+            padding: 1px 4px;
+            margin: 0 -1px;
+            border-radius: 2px;
+            font-weight: 500;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            transition: all var(--dur-fast) var(--ease-out);
+        }
+
+        .block-card:hover .example-highlight {
+            background: color-mix(in srgb, var(--gold) 18%, transparent);
+            border-bottom-color: var(--gold);
+        }
+
+        /* Mark tag default semantics override (nav prefers no underline on hover) */
+        mark.example-highlight {
+            background-color: var(--gold-soft);
+            color: var(--gold);
         }
 
         .insight {
@@ -1904,12 +1973,43 @@
     </aside>
 
     <main>
+        <!-- ═══ HERO · Linguistic Lab editorial intro ═══ -->
+        <section class="hero">
+            <div class="hero__meta">
+                <span class="hero__meta-item">Inglês Semântico</span>
+                <span class="hero__meta-sep"></span>
+                <span>Edição · MMXXVI</span>
+                <span class="hero__meta-sep"></span>
+                <span>Para Falantes Brasileiros</span>
+            </div>
+            <h1 class="hero__title">
+                <span class="stanza">A arquitetura</span>
+                <span class="stanza"><em>semântica</em> do</span>
+                <span class="stanza">inglês.</span>
+            </h1>
+            <p class="hero__lead">
+                Um framework editorial para mapear, treinar e dominar os blocos de
+                significado do inglês — dos padrões cotidianos aos registros profissionais.
+                Cada bloco vem com áudio, IPA e exemplos contextualizados.
+            </p>
+            <div class="hero__tldr">
+                <span class="eyebrow">O que você encontra</span>
+                <p>
+                    Duzentos e trinta blocos. Seis famílias semânticas. Três níveis
+                    de proficiência. Cada um classificado pela sua função comunicativa
+                    e acompanhado de seu próprio <em>léxico de uso</em> — pronúncia,
+                    contexto e variações práticas.
+                </p>
+            </div>
+        </section>
+
         <div class="blocks-grid" id="blocksContainer"></div>
         <div class="no-results" id="noResults" style="display: none;">
-            <div class="no-results-title">No blocks found</div>
-            <p>Try adjusting your filters or search term</p>
+            <div class="no-results-title">Nenhum bloco encontrado</div>
+            <p>Ajuste os filtros ou o termo de busca</p>
         </div>
 
+        <!-- ═══ FOOTER · Linguistic Lab ═══ -->
         <footer class="main-footer">
             <div class="footer__mark">VS <em>Consulting</em></div>
             <div class="footer__divider"></div>
@@ -1918,7 +2018,7 @@
                 Para Vagner &amp; Thays · Preparação semântica para fluência real.<br>
                 Versão 3.3 · MMXXVI · Um estudo sobre a arquitetura semântica do inglês.
             </p>
-            <span class="footer__build">build v3.3 · VS Linguistic Lab</span>
+            <span class="footer__build">build v3.3 · vs linguistic lab</span>
         </footer>
     </main>
 
@@ -1995,6 +2095,112 @@
 
         function getFamily(category) {
             return familyMap[category] || {family: 'discursive', label: 'DISCURSIVE'};
+        }
+
+        /**
+         * Destaca a frase-padrão (enPattern) dentro de um exemplo.
+         * Estratégia em 3 níveis (cai no fallback se o anterior falhar):
+         *   1. Match exato do padrão (case-insensitive, sem pontuação)
+         *   2. Match das primeiras 3-4 palavras do núcleo do padrão
+         *   3. Match palavra-por-palavra (todas precisam aparecer em sequência próxima)
+         * Se nada bater, retorna o exemplo sem destaque (não quebra renderização).
+         *
+         * Retorna HTML seguro com o trecho casado embrulhado em <mark class="example-highlight">.
+         */
+        function highlightPattern(exampleText, pattern) {
+            if (!exampleText || !pattern) return escapeHtml(exampleText || '');
+
+            const safeExample = escapeHtml(exampleText);
+
+            // Normaliza para comparação: lowercase, sem pontuação, espaços limpos
+            const normalize = (s) => s.toLowerCase()
+                .replace(/[.,!?;:"'\u2018\u2019\u201C\u201D]/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            const normExample = normalize(exampleText);
+            const normPattern = normalize(pattern);
+
+            // ─── Nível 1: match exato ───
+            const idx1 = normExample.indexOf(normPattern);
+            if (idx1 !== -1) {
+                return wrapByNormalizedRange(exampleText, idx1, normPattern.length);
+            }
+
+            // ─── Nível 2: primeiras 3 palavras do padrão ───
+            const patternWords = normPattern.split(' ').filter(w => w.length > 0);
+            if (patternWords.length >= 3) {
+                const headWords = patternWords.slice(0, Math.min(4, patternWords.length)).join(' ');
+                const idx2 = normExample.indexOf(headWords);
+                if (idx2 !== -1) {
+                    return wrapByNormalizedRange(exampleText, idx2, headWords.length);
+                }
+            }
+
+            // ─── Nível 3: primeira palavra significativa (≥4 caracteres) ───
+            const meaningfulWord = patternWords.find(w => w.length >= 4);
+            if (meaningfulWord) {
+                const idx3 = normExample.indexOf(meaningfulWord);
+                if (idx3 !== -1) {
+                    // Highlight só essa palavra
+                    return wrapByNormalizedRange(exampleText, idx3, meaningfulWord.length);
+                }
+            }
+
+            // Fallback: sem destaque
+            return safeExample;
+        }
+
+        /**
+         * Helper interno: dado um exemplo original e índice/comprimento na versão normalizada,
+         * encontra a posição correspondente no texto ORIGINAL e embrulha em <mark>.
+         * Funciona porque a normalização preserva a ordem dos caracteres alfabéticos.
+         */
+        function wrapByNormalizedRange(originalText, normStart, normLength) {
+            // Mapeia caracteres normalizados → posições originais
+            let normIdx = 0;
+            let originalStart = -1;
+            let originalEnd = -1;
+            const lower = originalText.toLowerCase();
+
+            for (let i = 0; i < originalText.length; i++) {
+                const ch = lower[i];
+                // Se o caractere "conta" na normalização (não é pontuação, não é whitespace duplo)
+                const isPunct = /[.,!?;:"'\u2018\u2019\u201C\u201D]/.test(ch);
+                if (isPunct) continue;
+
+                if (originalStart === -1 && normIdx === normStart) {
+                    originalStart = i;
+                }
+                if (normIdx === normStart + normLength) {
+                    originalEnd = i;
+                    break;
+                }
+                normIdx++;
+            }
+
+            if (originalStart === -1) {
+                return escapeHtml(originalText);
+            }
+            if (originalEnd === -1) {
+                originalEnd = originalText.length;
+            }
+
+            const before = escapeHtml(originalText.slice(0, originalStart));
+            const matched = escapeHtml(originalText.slice(originalStart, originalEnd));
+            const after = escapeHtml(originalText.slice(originalEnd));
+
+            return `${before}<mark class="example-highlight">${matched}</mark>${after}`;
+        }
+
+        function escapeHtml(s) {
+            if (!s) return '';
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
 
         const pronunciationData = {
@@ -6053,7 +6259,7 @@
                     ${block.examples.map((ex, i) => `
                         <div class="example-item">
                             <div class="example-en-row">
-                                <div class="example-en">${ex.en}</div>
+                                <div class="example-en">${highlightPattern(ex.en, block.enPattern)}</div>
                                 <div class="example-actions">
                                     <button class="example-speak-btn" data-ex-idx="${i}" title="Ouvir este exemplo" aria-label="Ouvir exemplo">
                                         <span class="icon-static-mini">🔊</span>
