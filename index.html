@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blocos Semânticos em Inglês</title>
+    <title>Blocos Semânticos · VS Linguistic Lab</title>
 
     <!-- ─── PWA META ─── -->
     <meta name="theme-color" content="#0A1628">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Blocos EN">
-    <meta name="description" content="Blocos semânticos em inglês — VS Consulting™. Material didático interativo para aprendizado de inglês por brasileiros.">
+    <meta name="description" content="Blocos Semânticos em Inglês — Um framework editorial para mapear, treinar e dominar a arquitetura semântica do inglês americano. VS Consulting · Linguistic Lab.">
+    <meta property="og:site_name" content="VS Linguistic Lab">
+    <meta property="og:title" content="Blocos Semânticos em Inglês">
+    <meta property="og:description" content="A arquitetura semântica do inglês — 230 blocos, áudio, IPA, exemplos contextualizados.">
+    <meta property="og:type" content="website">
 
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -25,16 +31,49 @@
         }
 
         :root {
-            /* Structural tokens — same for both themes */
+            /* ═══ VS LINGUISTIC LAB — Editorial Tokens (oficial) ═══ */
+            /* Base ink scale (dark navy editorial) */
+            --ink:    #0A1220;
+            --ink-2:  #10192B;
+            --ink-3:  #18223A;
+            --ink-4:  #202C48;
+
+            /* Paper tones (text on dark) */
+            --paper:    #F5F1E8;
+            --paper-80: rgba(245, 241, 232, 0.82);
+            --paper-60: rgba(245, 241, 232, 0.58);
+            --paper-40: rgba(245, 241, 232, 0.38);
+
+            /* Gold — single accent of the system */
+            --gold:      #C9A35C;
+            --gold-soft: rgba(201, 163, 92, 0.12);
+            --gold-line: rgba(201, 163, 92, 0.28);
+
+            /* Hairlines */
+            --line:        rgba(245, 241, 232, 0.08);
+            --line-strong: rgba(245, 241, 232, 0.16);
+
+            /* Tripartite — sage / amber / terracotta */
+            --sage:      #7FA889;
+            --sage-soft: rgba(127, 168, 137, 0.10);
+            --sage-line: rgba(127, 168, 137, 0.32);
+            --amber:     #C9A35C;
+            --amber-soft: rgba(201, 163, 92, 0.10);
+            --amber-line: rgba(201, 163, 92, 0.32);
+            --terra:     #C77B5C;
+            --terra-soft: rgba(199, 123, 92, 0.10);
+            --terra-line: rgba(199, 123, 92, 0.32);
+
+            /* App-specific tokens (mapped from Linguistic Lab base) */
             --teal: #0D9488;
             --teal-light: #14B8A6;
-            --gold: #D4A843;
-            --gold-light: #F0C060;
+            --gold-light: #E0BB6F;
+            --gold-deep: #A8822E;
             --success: #22C55E;
             --warning: #F59E0B;
             --error: #EF4444;
 
-            /* Family colors */
+            /* Family colors — kept stable for content categorization */
             --fam-social:       #F97316;
             --fam-emotional:    #F472B6;
             --fam-cognitive:    #A78BFA;
@@ -43,33 +82,40 @@
             --fam-discursive:   #38BDF8;
 
             --sidebar-width: 260px;
-            --header-height: 56px;
+            --header-height: 64px;
+
+            /* Editorial typography stack */
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body:    'Instrument Sans', system-ui, sans-serif;
+            --font-mono:    'JetBrains Mono', ui-monospace, monospace;
         }
 
-        /* DARK THEME (default) */
+        /* DARK THEME (default) — uses ink/paper directly */
         :root, [data-theme="dark"] {
-            --navy: #0A1628;
-            --surface: #0F1E35;
-            --surface-2: #162840;
-            --border: #1E3A5F;
-            --text: #E2E8F0;
-            --text-muted: #94A3B8;
-            --text-dim: #64748B;
-            --shadow-soft: rgba(0, 0, 0, 0.3);
-            --overlay-bg: rgba(0, 0, 0, 0.55);
+            --navy: var(--ink);
+            --surface: var(--ink-2);
+            --surface-2: var(--ink-3);
+            --border: var(--line-strong);
+            --text: var(--paper);
+            --text-muted: var(--paper-80);
+            --text-dim: var(--paper-60);
+            --shadow-soft: rgba(0, 0, 0, 0.4);
+            --overlay-bg: rgba(10, 18, 32, 0.85);
+            --hairline: var(--gold-line);
         }
 
-        /* LIGHT THEME */
+        /* LIGHT THEME — Editorial paper */
         [data-theme="light"] {
-            --navy: #F4F1EA;
+            --navy: #FAF7F0;
             --surface: #FFFFFF;
-            --surface-2: #F7F3EC;
-            --border: #DDD4C5;
-            --text: #1A2332;
-            --text-muted: #5B6475;
-            --text-dim: #8D94A3;
+            --surface-2: #F5F1E8;
+            --border: rgba(10, 18, 32, 0.12);
+            --text: #0A1220;
+            --text-muted: rgba(10, 18, 32, 0.72);
+            --text-dim: rgba(10, 18, 32, 0.50);
             --shadow-soft: rgba(60, 70, 90, 0.08);
-            --overlay-bg: rgba(20, 30, 50, 0.4);
+            --overlay-bg: rgba(245, 241, 232, 0.92);
+            --hairline: rgba(168, 130, 46, 0.25);
             --teal: #0F766E;
             --gold: #A8822E;
         }
@@ -77,9 +123,26 @@
         body {
             background: var(--navy);
             color: var(--text);
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: var(--font-body);
+            font-size: 15px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
             transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        /* Subtle decorative grain on dark theme */
+        [data-theme="dark"] body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                radial-gradient(1200px 800px at 80% -10%, var(--gold-soft), transparent 60%),
+                radial-gradient(900px 600px at -10% 110%, rgba(127, 168, 137, 0.05), transparent 55%);
+            opacity: 0.6;
         }
 
         /* ─── MICRO-INTERACTIONS ─── */
@@ -123,20 +186,26 @@
             animation: starPulse 0.5s ease;
         }
 
-        /* ─── HEADER ─── */
+        /* ─── HEADER (Linguistic Lab topbar) ─── */
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             height: var(--header-height);
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
+            background: rgba(10, 18, 32, 0.72);
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            border-bottom: 1px solid var(--line);
             display: flex;
             align-items: center;
-            padding: 0 10px;
-            gap: 8px;
+            padding: 0 14px;
+            gap: 12px;
             z-index: 200;
+        }
+
+        [data-theme="light"] header {
+            background: rgba(245, 241, 232, 0.82);
         }
 
         /* ─── MOBILE SEARCH BAR (secondary row, mobile only) ─── */
@@ -158,40 +227,152 @@
             flex: 1;
         }
 
-        /* ─── VS CONSULTING BRANDING ─── */
+        /* ─── VS LINGUISTIC LAB — Brand pattern (oficial) ─── */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+            flex-shrink: 0;
+        }
+
+        .brand__mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--gold-line);
+            background: var(--gold-soft);
+            display: grid;
+            place-items: center;
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 12px;
+            color: var(--gold);
+            flex-shrink: 0;
+            transition: all 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .brand__mark:hover {
+            background: var(--gold);
+            color: var(--ink);
+            border-color: var(--gold);
+        }
+
+        .brand__text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            line-height: 1;
+        }
+
+        .brand__kicker {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+
+        .brand__name {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--paper);
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: -0.01em;
+        }
+
+        .topbar__version {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--paper-60);
+            padding: 5px 10px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ─── Legacy aliases preserved for backward CSS ─── */
+        .vs-seal {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--gold-line);
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 900;
+            color: var(--gold);
+            background: var(--gold-soft);
+            flex-shrink: 0;
+            transition: all 280ms;
+        }
+
+        .vs-seal:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
         .logo-wrap {
             display: flex;
             flex-direction: column;
             justify-content: center;
             min-width: 0;
             overflow: hidden;
+            gap: 1px;
+            line-height: 1;
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--gold);
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--paper);
             white-space: nowrap;
-            line-height: 1.1;
-            /* On mobile, truncate instead of pushing everyone else off screen */
+            line-height: 1.2;
             max-width: 200px;
             overflow: hidden;
             text-overflow: ellipsis;
+            letter-spacing: -0.01em;
+        }
+
+        .logo em {
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 500;
         }
 
         .logo-brand {
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: var(--font-mono);
             font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 1.2px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: var(--text-dim);
+            color: var(--gold);
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+            margin-top: 3px;
         }
 
-        .logo-brand span {
-            color: var(--teal);
+        .logo-brand .lab {
+            color: var(--gold);
+        }
+
+        .logo-brand .sep {
+            opacity: 0.4;
+            color: var(--paper-60);
         }
 
         /* Sidebar brand footer */
@@ -203,7 +384,7 @@
         }
 
         .sidebar-brand-logo {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-display);
             font-size: 13px;
             font-weight: 700;
             color: var(--gold);
@@ -218,48 +399,78 @@
             margin-top: 3px;
         }
 
-        /* Main footer */
+        /* ─── Footer (Linguistic Lab pattern oficial) ─── */
         .main-footer {
-            margin-top: 48px;
-            padding: 24px 0 16px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+            margin-top: 64px;
+            padding: 56px 24px 40px;
+            border-top: 1px solid var(--line);
             text-align: center;
+            position: relative;
         }
 
-        .footer-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            font-weight: 700;
+        .footer__mark {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--paper);
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            font-variation-settings: "opsz" 144;
+            line-height: 1;
+        }
+
+        .footer__mark em {
+            font-style: italic;
             color: var(--gold);
-            letter-spacing: 0.3px;
         }
 
-        .footer-tagline {
-            font-size: 11px;
-            color: var(--text-dim);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .footer-divider {
-            width: 40px;
+        .footer__divider {
+            width: 60px;
             height: 1px;
-            background: linear-gradient(to right, transparent, var(--teal), transparent);
-            margin: 4px auto;
+            background: var(--gold);
+            margin: 20px auto;
         }
 
-        .footer-copy {
-            font-size: 11px;
-            color: var(--text-dim);
+        .footer__tagline {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--paper-60);
+            margin-bottom: 8px;
         }
 
-        .footer-copy span {
-            color: var(--text-muted);
+        .footer__meta {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--paper-40);
+            max-width: 48ch;
+            margin: 8px auto 0;
+            line-height: 1.6;
         }
+
+        .footer__meta em {
+            font-style: italic;
+            color: var(--paper-60);
+        }
+
+        .footer__build {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--paper-40);
+            opacity: 0.6;
+            display: block;
+            margin-top: 12px;
+        }
+
+        /* Legacy aliases */
+        .footer-brand,
+        .footer-tagline,
+        .footer-divider,
+        .footer-copy,
+        .footer-rule { display: none; }
 
         .search-box {
             flex: 1;
@@ -388,7 +599,7 @@
         }
 
         .export-title {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-display);
             font-size: 22px;
             color: var(--gold);
             margin-bottom: 6px;
@@ -402,7 +613,7 @@
         }
 
         .export-count {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 28px;
             color: var(--teal-light);
             font-weight: 600;
@@ -486,7 +697,7 @@
                 display: block !important;
                 background: #fff !important;
                 color: #1a2332 !important;
-                font-family: 'IBM Plex Sans', sans-serif;
+                font-family: var(--font-body);
                 padding: 40px;
                 max-width: 780px;
                 margin: 0 auto;
@@ -497,7 +708,7 @@
                 margin-bottom: 28px;
             }
             .print-title {
-                font-family: 'Playfair Display', serif;
+                font-family: var(--font-display);
                 font-size: 28px;
                 color: #1a2332 !important;
                 font-weight: 800;
@@ -531,7 +742,7 @@
                 margin-bottom: 6px;
             }
             .print-block-en {
-                font-family: 'Playfair Display', serif;
+                font-family: var(--font-display);
                 font-size: 18px;
                 font-weight: 700;
                 color: #A8822E !important;
@@ -543,7 +754,7 @@
                 margin-bottom: 10px;
             }
             .print-block-ipa {
-                font-family: 'JetBrains Mono', monospace;
+                font-family: var(--font-mono);
                 font-size: 12px;
                 color: #A8822E !important;
                 margin-bottom: 8px;
@@ -880,23 +1091,26 @@
         }
 
         .en-pattern {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
+            font-family: var(--font-display);
+            font-size: 22px;
             font-weight: 700;
             color: var(--gold);
-            line-height: 1.4;
+            line-height: 1.25;
+            letter-spacing: -0.015em;
             margin-bottom: 4px;
             word-break: break-word;
+            font-variation-settings: "opsz" 144;
         }
 
         .category-tag {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 10px;
+            font-family: var(--font-mono);
+            font-size: 9px;
             font-weight: 500;
-            letter-spacing: 1.2px;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             color: color-mix(in srgb, var(--fam-color, var(--teal)) 70%, var(--text-muted));
             margin-bottom: 10px;
+            opacity: 0.85;
             opacity: 0.85;
         }
 
@@ -927,7 +1141,7 @@
             padding: 6px 10px;
             border-radius: 4px;
             font-size: 12px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -1126,7 +1340,7 @@
             gap: 5px;
             transition: all 0.2s;
             flex-shrink: 0;
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: var(--font-body);
             font-weight: 500;
         }
 
@@ -1203,7 +1417,7 @@
         }
 
         .pron-friendly {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 14px;
             color: var(--teal-light);
             letter-spacing: 0.5px;
@@ -1225,7 +1439,7 @@
         .pron-panel.visible { display: block; }
 
         .pron-ipa {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 15px;
             color: var(--gold);
             letter-spacing: 0.5px;
@@ -1604,14 +1818,17 @@
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle filters">
             <span></span><span></span><span></span>
         </button>
-        <div class="logo-wrap">
-            <div class="logo">Blocos Semânticos em Inglês</div>
-            <div class="logo-brand"><span>VS</span> Consulting™</div>
+        <div class="brand">
+            <div class="brand__mark">VS</div>
+            <div class="brand__text">
+                <div class="brand__kicker">VS Consulting</div>
+                <div class="brand__name">Linguistic Lab</div>
+            </div>
         </div>
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search patterns or translations...">
+            <input type="text" id="searchInput" placeholder="Buscar padrões ou traduções...">
         </div>
-        <div class="counter"><span id="blockCount">0</span> of <span id="totalCount">230</span></div>
+        <div class="counter"><span id="blockCount">0</span> / <span id="totalCount">230</span></div>
         <button class="export-btn" id="exportBtn" aria-label="Exportar favoritos" title="Exportar favoritos">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </button>
@@ -1694,14 +1911,14 @@
         </div>
 
         <footer class="main-footer">
-            <div class="footer-brand">VS Consulting™</div>
-            <div class="footer-tagline">Strategy · Data · Technology</div>
-            <div class="footer-divider"></div>
-            <div class="footer-copy">
-                <span>Blocos Semânticos em Inglês</span> — Material didático exclusivo<br>
-                © 2025 VS Consulting™. Todos os direitos reservados.<br>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;opacity:0.6;">build v3.2 · Mobile Header Fix</span>
-            </div>
+            <div class="footer__mark">VS <em>Consulting</em></div>
+            <div class="footer__divider"></div>
+            <div class="footer__tagline">Linguistic Lab · English Edition</div>
+            <p class="footer__meta">
+                Para Vagner &amp; Thays · Preparação semântica para fluência real.<br>
+                Versão 3.3 · MMXXVI · Um estudo sobre a arquitetura semântica do inglês.
+            </p>
+            <span class="footer__build">build v3.3 · VS Linguistic Lab</span>
         </footer>
     </main>
 
